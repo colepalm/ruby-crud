@@ -32,12 +32,22 @@ var Body = React.createClass({
         this.setState({items: newItems});
     },
 
+    handleUpdate(item) {
+        $.ajax({
+            url:`/api/v1/items/${item.id}`,
+            type:'PUT',
+            data: { item: item },
+            success: () => {
+                console.log('yep');
+            }
+        })
+    },
 
     render() {
         return (
             <div>
                 <NewItem handleSubmit={this.handleSubmit}/>
-                <AllItems items={this.state.items} handleDelete={this.handleDelete}/>
+                <AllItems items={this.state.items} handleDelete={this.handleDelete} handleUpdate={this.handleUpdate}/>
             </div>
         )
     }
